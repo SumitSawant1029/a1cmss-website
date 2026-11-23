@@ -23,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/interactive.css">
 </head>
 <body>
 
@@ -119,15 +120,21 @@
         <a href="#rental" class="btn btn--ghost btn--lg">Rent a Machine</a>
       </div>
       <ul class="hero__stats">
-        <li><strong>500+</strong><span>Machines serviced</span></li>
-        <li><strong>24 hr</strong><span>Breakdown response</span></li>
-        <li><strong>100%</strong><span>Genuine spares</span></li>
+        <li><strong data-count="500" data-suffix="+">500+</strong><span>Machines serviced</span></li>
+        <li><strong data-count="24" data-suffix=" hr">24 hr</strong><span>Breakdown response</span></li>
+        <li><strong data-count="100" data-suffix="%">100%</strong><span>Genuine spares</span></li>
       </ul>
     </div>
 
     <div class="hero__media">
       <figure class="img-slot img-slot--dark is-loaded" data-src="images/hero-main.jpg" data-alt="Ride-on scrubber cleaning a large warehouse floor" style="--ratio: 4 / 3">
         <img src="images/hero-main.jpg" alt="Ride-on scrubber cleaning a large warehouse floor" loading="eager" fetchpriority="high" decoding="async">
+        <canvas class="wipe" id="wipeCanvas" aria-hidden="true"></canvas>
+        <div class="wipe__bubbles" id="wipeBubbles" aria-hidden="true"></div>
+        <button type="button" class="wipe__hint" id="wipeHint">
+          <span class="wipe__hand" aria-hidden="true">👆</span>
+          <span class="wipe__label"><span class="wipe__do">Rub the floor to clean it</span><span class="wipe__pct" id="wipePct"></span></span>
+        </button>
         <div class="img-slot__ph">
           <svg class="ic"><use href="#i-image"/></svg>
           <span class="img-slot__file">images/hero-main.jpg</span>
@@ -149,6 +156,41 @@
       One partner for every cleaning machine you own. We <span class="hl">sell</span> it. We <span class="hl">rent</span> it.
       We stock its <span class="hl">spares</span>. And we keep it <span class="hl">running</span> — so your floors never wait.
     </p>
+  </div>
+</section>
+
+<!-- ============ SCRUBBER STRIP (drives & cleans as you scroll) ============ -->
+<section class="scrub" aria-label="Ride-on scrubber cleaning the floor">
+  <div class="container scrub__head">
+    <p class="scrub__kicker">Watch it clean</p>
+    <p class="scrub__line">Our ride-on scrubbers clean up to <strong><span data-count="4000" data-sep="1" data-on-view>4,000</span> m²</strong> every hour.</p>
+  </div>
+  <div class="scrub__floor" id="scrubFloor">
+    <div class="scrub__clean"></div>
+    <div class="scrub__dirt" id="scrubDirt"></div>
+    <div class="scrub__machine" id="scrubMachine">
+      <svg viewBox="0 0 230 150" aria-hidden="true">
+        <ellipse cx="112" cy="140" rx="100" ry="7" fill="rgba(0,0,0,.25)"/>
+        <rect x="6" y="116" width="34" height="9" rx="4" fill="#1d2430"/>
+        <circle class="scrub__drop" cx="18" cy="128" r="3"/><circle class="scrub__drop d2" cx="28" cy="130" r="2.4"/><circle class="scrub__drop d3" cx="10" cy="131" r="2"/>
+        <rect x="26" y="56" width="166" height="58" rx="16" fill="#f5b301"/>
+        <rect x="26" y="96" width="166" height="20" rx="6" fill="#2b2f36"/>
+        <rect x="34" y="62" width="150" height="6" rx="3" fill="rgba(255,255,255,.35)"/>
+        <text x="104" y="89" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="22" fill="#0f1f33">A-1</text>
+        <rect x="52" y="48" width="56" height="11" rx="5" fill="#1d2430"/>
+        <path d="M56 50 L52 18 Q52 12 58 12 L70 12 Q75 12 75 18 L76 50 Z" fill="#1d2430"/>
+        <line x1="64" y1="12" x2="64" y2="4" stroke="#1d2430" stroke-width="3"/>
+        <circle class="scrub__beacon" cx="64" cy="4" r="4.5"/>
+        <rect x="138" y="46" width="44" height="12" rx="4" fill="#1d2430"/>
+        <line x1="148" y1="50" x2="160" y2="20" stroke="#1d2430" stroke-width="6" stroke-linecap="round"/>
+        <ellipse cx="160" cy="19" rx="15" ry="4.5" fill="none" stroke="#1d2430" stroke-width="4"/>
+        <g class="scrub__wheel" style="transform-origin:58px 118px"><circle cx="58" cy="118" r="21" fill="#151a22"/><circle cx="58" cy="118" r="9" fill="#9aa4b2"/><rect x="56" y="99" width="4" height="10" fill="#9aa4b2"/></g>
+        <g class="scrub__wheel" style="transform-origin:170px 124px"><circle cx="170" cy="124" r="15" fill="#151a22"/><circle cx="170" cy="124" r="6" fill="#9aa4b2"/><rect x="168" y="110" width="4" height="7" fill="#9aa4b2"/></g>
+        <rect x="178" y="128" width="46" height="8" rx="3" fill="#2b2f36"/>
+        <g class="scrub__brush"><ellipse cx="201" cy="138" rx="22" ry="4" fill="#3a6fd8"/><ellipse cx="201" cy="137" rx="22" ry="2" fill="none" stroke="#9cc0ff" stroke-width="1.5" stroke-dasharray="3 4"/></g>
+      </svg>
+      <span class="scrub__spark s1">✦</span><span class="scrub__spark s2">✦</span><span class="scrub__spark s3">✧</span>
+    </div>
   </div>
 </section>
 
@@ -287,6 +329,61 @@
           </div>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MACHINE FINDER (3-tap quiz) ============ -->
+<section class="section finder-sec" id="finder">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Machine Finder</span>
+      <h2>Not Sure Which Machine You Need?</h2>
+      <p>Answer three quick questions and we'll suggest the right machine for your floor.</p>
+    </div>
+    <div class="finder" id="finder-app">
+      <div class="finder__bar"><span id="finderBar"></span></div>
+      <div class="finder__stage" id="finderStage">
+        <div class="finder__step is-active" data-step="area">
+          <p class="finder__q"><span class="finder__n">1 / 3</span>How big is the area you clean?</p>
+          <div class="finder__opts">
+            <button type="button" data-v="small"><span class="finder__ico">🏢</span><b>Under 2,000 sq ft</b><small>Office, clinic, showroom</small></button>
+            <button type="button" data-v="medium"><span class="finder__ico">🏬</span><b>2,000 – 20,000 sq ft</b><small>Hotel, hospital floor, school</small></button>
+            <button type="button" data-v="large"><span class="finder__ico">🏭</span><b>Over 20,000 sq ft</b><small>Mall, warehouse, factory</small></button>
+          </div>
+        </div>
+        <div class="finder__step" data-step="floor">
+          <p class="finder__q"><span class="finder__n">2 / 3</span>What do you mostly need to clean?</p>
+          <div class="finder__opts finder__opts--4">
+            <button type="button" data-v="hard"><span class="finder__ico">✨</span><b>Tiles, marble &amp; granite</b><small>Scrubbing &amp; polishing</small></button>
+            <button type="button" data-v="concrete"><span class="finder__ico">🧱</span><b>Concrete / industrial</b><small>Heavy-duty floors</small></button>
+            <button type="button" data-v="carpet"><span class="finder__ico">🧶</span><b>Carpets</b><small>Shampooing &amp; deep clean</small></button>
+            <button type="button" data-v="mess"><span class="finder__ico">💧</span><b>Dust, debris &amp; spills</b><small>Wet &amp; dry pickup</small></button>
+          </div>
+        </div>
+        <div class="finder__step" data-step="mode">
+          <p class="finder__q"><span class="finder__n">3 / 3</span>Would you like to buy or rent?</p>
+          <div class="finder__opts">
+            <button type="button" data-v="Buy"><span class="finder__ico">🛒</span><b>Buy</b><small>Own it, with AMC support</small></button>
+            <button type="button" data-v="Rent"><span class="finder__ico">📅</span><b>Rent</b><small>Daily, weekly or monthly</small></button>
+            <button type="button" data-v="Not sure"><span class="finder__ico">🤔</span><b>Not sure yet</b><small>Help me decide</small></button>
+          </div>
+        </div>
+        <div class="finder__step finder__result" data-step="result">
+          <div class="finder__rimg"><img id="finderImg" src="images/product-ride-on.jpg" alt="" loading="lazy"></div>
+          <div class="finder__rbody">
+            <span class="finder__match">✓ Best match for you</span>
+            <h3 id="finderTitle">Ride-On Scrubber</h3>
+            <p id="finderWhy"></p>
+            <div class="finder__cta">
+              <a class="btn btn--accent" id="finderWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-chat"/></svg>Get Price on WhatsApp</a>
+              <a class="btn btn--outline" id="finderForm" href="#contact">Send Enquiry</a>
+            </div>
+            <button type="button" class="finder__restart" id="finderRestart">↺ Start over</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="finder__back" id="finderBack" hidden>← Back</button>
     </div>
   </div>
 </section>
@@ -521,6 +618,29 @@
   </div>
 </section>
 
+<!-- ============ BEFORE / AFTER ============ -->
+<section class="section ba-sec" id="difference">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">See the Difference</span>
+      <h2>From Dull to Dazzling</h2>
+      <p>Drag the handle to see what a professional machine clean does for a marble floor.</p>
+    </div>
+    <div class="ba" id="ba" style="--pos: 50%">
+      <img class="ba__img ba__after" src="images/industry-mall.jpg" alt="Polished, spotless marble floor after machine cleaning" loading="lazy">
+      <div class="ba__before" aria-hidden="true">
+        <img class="ba__img" src="images/industry-mall.jpg" alt="" loading="lazy">
+        <div class="ba__grime"></div>
+      </div>
+      <span class="ba__tag ba__tag--l">Before</span>
+      <span class="ba__tag ba__tag--r">After</span>
+      <div class="ba__handle" id="baHandle" role="slider" tabindex="0" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <span class="ba__knob">‹ ›</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ INDUSTRIES ============ -->
 <section class="section" id="industries">
   <div class="container">
@@ -641,6 +761,7 @@
 
 <!-- ============ CTA BAND ============ -->
 <section class="cta-band">
+  <div class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="container cta-band__inner">
     <div>
       <h2>Not sure which machine you need?</h2>
@@ -778,5 +899,6 @@
 <div class="scroll-progress" aria-hidden="true"></div>
 
 <script src="js/main.js"></script>
+<script src="js/interactive.js"></script>
 </body>
 </html>
