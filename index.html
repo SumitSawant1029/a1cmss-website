@@ -238,6 +238,12 @@
   </div>
 </section>
 
+<!-- ============ RIBBONS (move with scroll) ============ -->
+<div class="ribbons" aria-hidden="true">
+  <div class="ribbon ribbon--a"><div class="ribbon__track" data-ribbon="1"><span>Industrial Vacuum Cleaners</span><i>✦</i><span>Single Disc Machines</span><i>✦</i><span>Ride-On Scrubbers</span><i>✦</i><span>Sweepers</span><i>✦</i><span>Machine Rental</span><i>✦</i><span>Genuine Spare Parts</span><i>✦</i><span>AMC Service Contracts</span><i>✦</i><span>Free On-Site Demo</span><i>✦</i><span>Mumbai · Pune · Bangalore</span><i>✦</i><span>Industrial Vacuum Cleaners</span><i>✦</i><span>Single Disc Machines</span><i>✦</i><span>Ride-On Scrubbers</span><i>✦</i><span>Sweepers</span><i>✦</i><span>Machine Rental</span><i>✦</i><span>Genuine Spare Parts</span><i>✦</i><span>AMC Service Contracts</span><i>✦</i><span>Free On-Site Demo</span><i>✦</i><span>Mumbai · Pune · Bangalore</span><i>✦</i><span>Industrial Vacuum Cleaners</span><i>✦</i><span>Single Disc Machines</span><i>✦</i><span>Ride-On Scrubbers</span><i>✦</i><span>Sweepers</span><i>✦</i><span>Machine Rental</span><i>✦</i><span>Genuine Spare Parts</span><i>✦</i><span>AMC Service Contracts</span><i>✦</i><span>Free On-Site Demo</span><i>✦</i><span>Mumbai · Pune · Bangalore</span><i>✦</i></div></div>
+  <div class="ribbon ribbon--b"><div class="ribbon__track" data-ribbon="-1"><span>Industrial Vacuum Cleaners</span><i>✦</i><span>Single Disc Machines</span><i>✦</i><span>Ride-On Scrubbers</span><i>✦</i><span>Sweepers</span><i>✦</i><span>Machine Rental</span><i>✦</i><span>Genuine Spare Parts</span><i>✦</i><span>AMC Service Contracts</span><i>✦</i><span>Free On-Site Demo</span><i>✦</i><span>Mumbai · Pune · Bangalore</span><i>✦</i><span>Industrial Vacuum Cleaners</span><i>✦</i><span>Single Disc Machines</span><i>✦</i><span>Ride-On Scrubbers</span><i>✦</i><span>Sweepers</span><i>✦</i><span>Machine Rental</span><i>✦</i><span>Genuine Spare Parts</span><i>✦</i><span>AMC Service Contracts</span><i>✦</i><span>Free On-Site Demo</span><i>✦</i><span>Mumbai · Pune · Bangalore</span><i>✦</i><span>Industrial Vacuum Cleaners</span><i>✦</i><span>Single Disc Machines</span><i>✦</i><span>Ride-On Scrubbers</span><i>✦</i><span>Sweepers</span><i>✦</i><span>Machine Rental</span><i>✦</i><span>Genuine Spare Parts</span><i>✦</i><span>AMC Service Contracts</span><i>✦</i><span>Free On-Site Demo</span><i>✦</i><span>Mumbai · Pune · Bangalore</span><i>✦</i></div></div>
+</div>
+
 <!-- ============ PRODUCTS ============ -->
 <section class="section" id="products">
   <div class="container">
@@ -430,6 +436,46 @@
       </div>
 
       <a href="#contact" class="btn btn--primary btn--lg" data-interest="Rent">Check Rental Availability <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAVINGS CALCULATOR ============ -->
+<section class="section calc-sec" id="savings">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Savings Calculator</span>
+      <h2>How Much Time Could a Machine Save You?</h2>
+      <p>Move the sliders to match your site and see the difference between manual mopping and machine cleaning.</p>
+    </div>
+    <div class="calc" id="calc">
+      <div class="calc__inputs">
+        <label class="calc__field">
+          <span class="calc__lbl">Floor area <output id="calcAreaOut">25,000 sq ft</output></span>
+          <input type="range" id="calcArea" min="1000" max="200000" step="1000" value="25000">
+        </label>
+        <label class="calc__field">
+          <span class="calc__lbl">Cleanings per week <output id="calcFreqOut">7</output></span>
+          <input type="range" id="calcFreq" min="1" max="14" step="1" value="7">
+        </label>
+        <label class="calc__field">
+          <span class="calc__lbl">Cleaning staff cost <output id="calcWageOut">₹150 / hour</output></span>
+          <input type="range" id="calcWage" min="80" max="500" step="10" value="150">
+        </label>
+        <p class="calc__note">Indicative estimate using typical productivity rates (manual mopping ≈ 1,800 sq ft/hour per person). Actual results depend on your site.</p>
+      </div>
+      <div class="calc__out">
+        <p class="calc__machine">Suggested: <strong id="calcMachine">Walk-Behind Scrubber</strong></p>
+        <div class="calc__bars">
+          <div class="calc__row"><span>Manual mopping</span><div class="calc__bar calc__bar--manual"><i id="calcBarManual"></i></div><b id="calcManual">0 hrs</b></div>
+          <div class="calc__row"><span>With A-1 machine</span><div class="calc__bar calc__bar--machine"><i id="calcBarMachine"></i></div><b id="calcMach">0 hrs</b></div>
+        </div>
+        <div class="calc__big">
+          <div><strong id="calcHours">0</strong><span>hours saved every month</span></div>
+          <div><strong id="calcRupees">₹0</strong><span>labour cost saved every month</span></div>
+        </div>
+        <a href="#contact" class="btn btn--accent btn--block" id="calcCta" data-interest="Free Demo">Book a Free Demo on Your Floor <svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
@@ -759,6 +805,79 @@
   </div>
 </section>
 
+<!-- ============ COVERAGE MAP ============ -->
+<section class="section coverage-sec" id="coverage">
+  <div class="container coverage">
+    <div class="coverage__text">
+      <span class="eyebrow">Where We Deliver</span>
+      <h2>Machines, Spares &amp; Service Across Three Cities</h2>
+      <p>From our base in Jogeshwari East, Mumbai, we deliver machines, spare parts and on-site service to Mumbai, Pune and Bangalore.</p>
+      <ul class="cities">
+        <li data-city="mumbai"><span class="cities__dot"></span><div><strong>Mumbai</strong><small>Head office · Jogeshwari East</small></div></li>
+        <li data-city="pune"><span class="cities__dot"></span><div><strong>Pune</strong><small>Sales, rental, spares &amp; service</small></div></li>
+        <li data-city="bangalore"><span class="cities__dot"></span><div><strong>Bangalore</strong><small>Sales, rental, spares &amp; service</small></div></li>
+      </ul>
+    </div>
+    <div class="coverage__map">
+      <svg class="map-svg" viewBox="0 0 400 480" role="img" aria-label="Map showing deliveries between Mumbai, Pune and Bangalore">
+        <defs>
+          <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" class="map-svg__dot"/></pattern>
+          <linearGradient id="sea" x1="0" x2="1"><stop offset="0" class="map-svg__sea1"/><stop offset="1" class="map-svg__sea2"/></linearGradient>
+        </defs>
+        <rect width="400" height="480" fill="url(#dots)"/>
+        <path class="map-svg__coast" d="M60 20 C 70 90, 80 130, 98 170 S 120 250, 135 300 S 160 380, 190 470 L 0 470 L 0 20 Z" fill="url(#sea)"/>
+        <g class="map-svg__waves"><path d="M20 260 q 8 -6 16 0 t 16 0"/><path d="M30 330 q 8 -6 16 0 t 16 0"/><path d="M14 400 q 8 -6 16 0 t 16 0"/></g>
+        <text x="22" y="300" class="map-svg__sea-label">Arabian Sea</text>
+        <path id="routeMP" class="map-svg__route" d="M118 150 Q 150 160 168 196"/>
+        <path id="routePB" class="map-svg__route" d="M168 196 Q 250 300 262 410"/>
+        <path id="routeMB" class="map-svg__route map-svg__route--long" d="M118 150 Q 150 330 262 410"/>
+        <g class="map-svg__truck t1"><rect x="-9" y="-5" width="12" height="10" rx="2"/><rect x="3" y="-3" width="6" height="8" rx="1.5"/><animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#routeMP"/></animateMotion></g>
+        <g class="map-svg__truck t2"><rect x="-9" y="-5" width="12" height="10" rx="2"/><rect x="3" y="-3" width="6" height="8" rx="1.5"/><animateMotion dur="5s" begin="0.8s" repeatCount="indefinite" rotate="auto"><mpath href="#routePB"/></animateMotion></g>
+        <g class="map-svg__truck t3"><rect x="-9" y="-5" width="12" height="10" rx="2"/><rect x="3" y="-3" width="6" height="8" rx="1.5"/><animateMotion dur="6.5s" begin="2s" repeatCount="indefinite" rotate="auto"><mpath href="#routeMB"/></animateMotion></g>
+        <g class="map-svg__pin" data-city="mumbai" transform="translate(118 150)"><circle class="map-svg__pulse" r="9"/><circle class="map-svg__core" r="9"/><text x="-14" y="-16" text-anchor="end">Mumbai</text></g>
+        <g class="map-svg__pin" data-city="pune" transform="translate(168 196)"><circle class="map-svg__pulse" r="7"/><circle class="map-svg__core" r="7"/><text x="16" y="5">Pune</text></g>
+        <g class="map-svg__pin" data-city="bangalore" transform="translate(262 410)"><circle class="map-svg__pulse" r="7"/><circle class="map-svg__core" r="7"/><text x="16" y="5">Bangalore</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section--alt faq-sec" id="faq">
+  <div class="container faq-wrap">
+    <div class="section__head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions We Get Asked a Lot</h2>
+    </div>
+    <div class="faq" id="faqList">
+      <div class="faq__item">
+        <button type="button" class="faq__q" aria-expanded="false">Can I rent a machine for just one day?<span class="faq__icon"></span></button>
+        <div class="faq__a"><div><p>Yes. We rent machines daily, weekly, monthly or on long-term lease. We deliver the machine, show your team how to use it, and pick it up when you're done.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button type="button" class="faq__q" aria-expanded="false">Do you service machines that weren't bought from you?<span class="faq__icon"></span></button>
+        <div class="faq__a"><div><p>Yes. Our technicians service all types of industrial cleaning machines, whichever brand and wherever you bought them — under an AMC or as a one-off repair.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button type="button" class="faq__q" aria-expanded="false">Which cities do you cover?<span class="faq__icon"></span></button>
+        <div class="faq__a"><div><p>We're based in Jogeshwari East, Mumbai, and supply machines, spares and service across Mumbai, Pune and Bangalore.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button type="button" class="faq__q" aria-expanded="false">How do I find the right spare part for my machine?<span class="faq__icon"></span></button>
+        <div class="faq__a"><div><p>Send us your machine's brand and model number (a photo of the label on WhatsApp works too). We stock parts for most leading brands and can source the rest.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button type="button" class="faq__q" aria-expanded="false">What's included in an AMC?<span class="faq__icon"></span></button>
+        <div class="faq__a"><div><p>It depends on the plan: preventive visits, breakdown call-outs, labour and — on our Comprehensive plan — wear-and-tear spares. See the <a href="#service">Service Contracts</a> section or ask us for a quote.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button type="button" class="faq__q" aria-expanded="false">Can I see a machine working before I buy?<span class="faq__icon"></span></button>
+        <div class="faq__a"><div><p>Absolutely. We arrange a free on-site demo so you can see the machine clean your own floor. <a href="#contact" data-interest="Free Demo">Book a demo</a>.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CTA BAND ============ -->
 <section class="cta-band">
   <div class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -871,6 +990,8 @@
       <a href="#spares">Spare Parts</a>
       <a href="#service">Service Contracts (AMC)</a>
       <a href="#service">Repairs</a>
+      <a href="#savings">Savings Calculator</a>
+      <a href="#faq">FAQ</a>
     </div>
     <div>
       <h4>Contact</h4>

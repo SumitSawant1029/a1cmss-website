@@ -96,3 +96,17 @@ Clean school or university hallway with lockers and a shiny tiled floor, dayligh
 ## 23. `images/about-team-showroom.jpg`  —  aspect ratio 1/1
 
 Photorealistic image of a small, confident Indian team of four (sales and service staff) in matching navy polo shirts with yellow trim, standing smiling in a tidy showroom lined with industrial vacuum cleaners, single disc machines and a ride-on scrubber on display. Bright, welcoming lighting, professional company portrait style, square 1:1. (Replace later with a real photo of your team/showroom.)
+
+---
+
+## Before / After slider (optional — the slider uses these automatically when present)
+
+Generate **ba-after.jpg first**, then give that image back to Gemini and ask it to make the dirty version, so both show the *same* floor from the *same* angle.
+
+### `images/ba-after.jpg` — aspect ratio 16:9
+
+Photorealistic wide shot of a luxurious hotel lobby / mall corridor with a gleaming, freshly polished cream-and-white marble floor with subtle grey veins. Mirror-like reflections of ceiling lights and columns on the floor, completely spotless, bright daylight, professional architectural photography, no people, no text, no logos.
+
+### `images/ba-before.jpg` — aspect ratio 16:9 (edit of ba-after.jpg)
+
+Edit this exact image, keeping the same room, camera angle, lighting and composition: make the marble floor look dull, dirty and neglected — no shine or reflections, grey-brown grime, dusty footprints, scuff marks, dried water stains and dirt along the edges. Everything else unchanged. No text, no logos.

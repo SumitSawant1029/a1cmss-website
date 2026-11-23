@@ -477,3 +477,136 @@
     });
   }
 })();
+
+/* =========================================================
+   Round 2: ribbons · savings calculator · coverage map · FAQ ·
+   real before/after photos
+   ========================================================= */
+(() => {
+  "use strict";
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+  /* ---------- Ribbons slide with the scroll position ---------- */
+  const tracks = [...document.querySelectorAll(".ribbon__track")];
+  if (tracks.length && !reduceMotion) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      tracks.forEach((t) => {
+        const r = t.parentElement.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > innerHeight + 100) return;
+        const third = t.scrollWidth / 3;
+        const dir = Number(t.dataset.ribbon);
+        // move 0.5px per px scrolled; wrap inside one third so it loops seamlessly
+        let x = (window.scrollY * 0.5) % third;
+        x = dir > 0 ? -x : x - third;
+        t.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
+      });
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
+  /* ---------- Savings calculator ---------- */
+  const area = document.getElementById("calcArea");
+  if (area) {
+    const freq = document.getElementById("calcFreq");
+    const wage = document.getElementById("calcWage");
+    const el = (id) => document.getElementById(id);
+    const inr = (n) => "₹" + Math.round(n).toLocaleString("en-IN");
+    const shown = { manual: 0, mach: 0, hours: 0, rupees: 0 };
+    let anim = null;
+
+    function machineFor(sqft) {
+      if (sqft <= 5000) return { name: "Single Disc Machine", rate: 3500 };
+      if (sqft <= 30000) return { name: "Walk-Behind Scrubber-Dryer", rate: 15000 };
+      return { name: "Ride-On Scrubber-Dryer", rate: 40000 };
+    }
+    const fill = (input) => input.style.setProperty("--fill", ((input.value - input.min) / (input.max - input.min)) * 100 + "%");
+
+    function tweenTo(target) {
+      cancelAnimationFrame(anim);
+      const from = { ...shown };
+      const t0 = performance.now();
+      const dur = reduceMotion ? 1 : 600;
+      const step = (now) => {
+        const p = clamp((now - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 3);
+        for (const k in target) shown[k] = from[k] + (target[k] - from[k]) * e;
+        el("calcManual").textContent = Math.round(shown.manual).toLocaleString("en-IN") + " hrs";
+        el("calcMach").textContent = Math.round(shown.mach).toLocaleString("en-IN") + " hrs";
+        el("calcHours").textContent = Math.round(shown.hours).toLocaleString("en-IN");
+        el("calcRupees").textContent = inr(shown.rupees);
+        if (p < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+    }
+
+    function calc() {
+      const a = Number(area.value), f = Number(freq.value), w = Number(wage.value);
+      [area, freq, wage].forEach(fill);
+      el("calcAreaOut").textContent = a.toLocaleString("en-IN") + " sq ft";
+      el("calcFreqOut").textContent = f;
+      el("calcWageOut").textContent = `₹${w} / hour`;
+      const m = machineFor(a);
+      const cleans = f * 4.33;
+      const manual = (a / 1800) * cleans;
+      const mach = (a / m.rate) * cleans;
+      el("calcMachine").textContent = m.name;
+      el("calcBarManual").style.width = "100%";
+      el("calcBarMachine").style.width = Math.max(2, (mach / manual) * 100) + "%";
+      el("calcCta").onclick = () => {
+        const msg = document.getElementById("message");
+        if (msg) msg.value = `Savings calculator: ${a.toLocaleString("en-IN")} sq ft, cleaned ${f}x/week. Suggested: ${m.name}. I'd like a free demo.`;
+      };
+      tweenTo({ manual, mach, hours: manual - mach, rupees: (manual - mach) * w });
+    }
+    [area, freq, wage].forEach((i) => i.addEventListener("input", calc));
+
+    // run the first calculation when the section comes into view, so the numbers animate
+    if ("IntersectionObserver" in window) {
+      [area, freq, wage].forEach(fill);
+      const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { io.disconnect(); calc(); } }, { threshold: 0.35 });
+      io.observe(document.getElementById("calc"));
+    } else calc();
+  }
+
+  /* ---------- Coverage map: hover a city to highlight its pin ---------- */
+  document.querySelectorAll(".cities li").forEach((li) => {
+    const pin = document.querySelector(`.map-svg__pin[data-city="${li.dataset.city}"]`);
+    if (!pin) return;
+    const on = (v) => { pin.classList.toggle("is-on", v); li.classList.toggle("is-on", v); };
+    li.addEventListener("mouseenter", () => on(true));
+    li.addEventListener("mouseleave", () => on(false));
+    pin.addEventListener("mouseenter", () => on(true));
+    pin.addEventListener("mouseleave", () => on(false));
+  });
+
+  /* ---------- FAQ accordion (one open at a time) ---------- */
+  const faqItems = [...document.querySelectorAll(".faq__item")];
+  faqItems.forEach((item) => {
+    const btn = item.querySelector(".faq__q");
+    btn.addEventListener("click", () => {
+      const open = !item.classList.contains("is-open");
+      faqItems.forEach((o) => { o.classList.remove("is-open"); o.querySelector(".faq__q").setAttribute("aria-expanded", "false"); });
+      if (open) { item.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); }
+    });
+  });
+  // links inside answers that should pre-fill the enquiry form
+  document.querySelectorAll(".faq__a [data-interest]").forEach((a) => a.addEventListener("click", () => {
+    const i = document.getElementById("interest");
+    if (i) i.value = a.dataset.interest;
+  }));
+
+  /* ---------- Before/after: use real photos when they exist ---------- */
+  const ba = document.getElementById("ba");
+  if (ba) {
+    const load = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(src); i.onerror = rej; i.src = src; });
+    Promise.all([load("images/ba-before.jpg"), load("images/ba-after.jpg")]).then(([before, after]) => {
+      ba.querySelector(".ba__after").src = after;
+      ba.querySelector(".ba__before .ba__img").src = before;
+      ba.classList.add("ba--real");
+    }).catch(() => { /* keep the filtered fallback */ });
+  }
+})();
